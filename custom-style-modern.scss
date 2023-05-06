@@ -74,22 +74,7 @@ a {
   background-color: transparent !important;
 }
 
-table {
-  display: block;
-  padding: 0.25rem;
-  border: 0 !important;
-  border-radius: 15px;
-  background-color: var(--bg-darker);
-
-  > * {
-    border: 0;
-  }
-}
-
-tbody {
-  background: transparent;
-}
-
+//* Main content parent div
 #list-container {
   position: unset;
   margin-top: 300px;
@@ -99,49 +84,56 @@ tbody {
   width: 100%;
 }
 
+//* Banner image parent
 .cover-block {
   position: absolute;
   top: 46px;
   left: 0;
   margin: unset;
   width: 100%;
-}
 
-#cover-image-container {
-  position: relative;
-  display: block;
-  padding-top: unset;
-  width: 100%;
-
-  &::before {
-    content: '';
-    position: absolute;
-    z-index: 0;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 30%, var(--bg) 90%);
-    pointer-events: none;
+  #cover-image-container {
+    position: relative;
+    display: block;
+    padding-top: unset;
+    width: 100%;
+  
+    //* Banner img element
+    #cover-image {
+      content: var(--header-image);
+      object-fit: cover;
+      height: 300px;
+      width: 100%;
+      max-width: 100%;
+    }
+  
+    &::before {
+      content: '';
+      position: absolute;
+      z-index: 0;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 30%, var(--bg) 90%);
+      pointer-events: none;
+    }
   }
 }
 
-#cover-image {
-  content: var(--header-image);
-  object-fit: cover;
-  height: 300px;
-  width: 100%;
-  max-width: 100%;
-}
-
+//* Originally top part showing MAL logo, used for profile link
 .header {
   position: absolute;
   top: 210px;
   left: calc((100vw - 1200px) / 2 + 15px);
   z-index: 5;
 
+  //* MyAnimeList logo, disabled
   .header-title {
     display: none;
+    z-index: 1000;
+    left: 200px;
+    text-indent: 0px;
   }
 
   .header-menu {
@@ -150,6 +142,7 @@ tbody {
     .btn-menu {
       font-size: 0;
 
+      //* Username of list owner
       a.username {
         position: absolute;
         top: -1rem;
@@ -157,6 +150,7 @@ tbody {
         color: var(--primary);
         font-size: 1.5rem;
 
+        //* Custom profile picture
         &::after {
           content: '';
           position: absolute;
@@ -173,27 +167,21 @@ tbody {
         }
       }
 
+      //* Remove text "Viewing `username`'s list"
       > :not(a.username) {
         display: none;
       }
     }
 
+    //* Shared anime, affinity and history
     .header-info {
       position: absolute;
       left: 4.4rem;
       bottom: -0.6rem;
     }
 
+    //* Switch lists button
     .list-menu {
-      .icon-menu {
-        height: 25px;
-        width: 32px;
-
-        &:hover {
-          background-color: unset;
-        }
-      }
-
       display: block;
       top: 3.8rem;
       left: 0.5rem;
@@ -202,6 +190,46 @@ tbody {
       border: 0;
       border-radius: 50px;
       background-color: var(--primarydark);
+
+      //* Switch lists anchor element
+      .icon-menu {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        gap: 0.6rem;
+        height: 25px;
+        width: 32px;
+
+        &:hover {
+          background-color: unset;
+        }
+
+        > * {
+          position: unset !important;
+        }
+
+        //* Switch lists tooltip
+        .text {
+          opacity: 0;
+          position: absolute !important;
+          top: 0 !important;
+          left: 2.5rem !important;
+          padding: 0.4rem;
+          border-radius: 15px;
+          width: max-content;
+          color: white;
+          background-color: var(--primary);
+          pointer-events: none;
+          transition: opacity 100ms ease-in-out;
+        }
+
+        //* Switch lists icon
+        svg {
+          height: 16px;
+          width: 16px;
+          fill: white !important;
+        }
+      }
 
       //* Link to switch lists tooltip show on hover
       &:hover {
@@ -214,39 +242,6 @@ tbody {
         svg {
           fill: black !important;
         }
-      }
-
-      a {
-        display: flex !important;
-        align-items: center;
-        justify-content: center;
-        gap: 0.6rem;
-      }
-
-      .icon-menu > * {
-        position: unset !important;
-      }
-
-      //* Link to switch lists tooltip
-      .text {
-        opacity: 0;
-        position: absolute !important;
-        top: 0 !important;
-        left: 2.5rem !important;
-        padding: 0.4rem;
-        border-radius: 15px;
-        width: max-content;
-        color: white;
-        background-color: var(--primary);
-        pointer-events: none;
-        transition: opacity 100ms ease-in-out;
-      }
-
-      //* Link to switch lists
-      svg {
-        height: 16px;
-        width: 16px;
-        fill: white !important;
       }
     }
   }
@@ -272,10 +267,6 @@ tbody {
   }
 }
 
-.list-table .list-table-data a {
-  color: white !important;
-}
-
 .list-menu-float .icon-menu.profile {
   margin-right: 1rem;
   border-radius: 50%;
@@ -294,6 +285,7 @@ tbody {
   }
 }
 
+//TODO: Clean this
 //* If client is viewing someones list, show custom picture variable, else show own profile picture
 .header:has(a.username) ~ .list-menu-float .icon-menu.profile {
   pointer-events: none;
@@ -414,16 +406,6 @@ tbody {
   }
 }
 
-//* Top navbar 
-#status-menu {
-  position: fixed;
-  top: 0;
-  border: none;
-  width: 100%;
-  background: var(--primarydark);
-  transition: all 150ms;
-}
-
 #list-container::before {
   content: '';
   position: absolute;
@@ -434,119 +416,153 @@ tbody {
   background: var(--primarydark);
 }
 
+//* Top navbar
 .status-menu-container {
   position: fixed;
+  top: 0;
   z-index: 50;
+  width: 100%;
+  border: none;
   background: rgba(177, 99, 133, 0.82) !important;
   box-shadow: 0 rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
+  transition: all 150ms;
+
+  a {
+    color: white !important;
+  }
+
+  .status-menu .status-button:after {
+    background-color: var(--primary) !important;
+  }
 }
 
-#status-menu a {
-  color: white;
-}
-
-.status-menu .status-button:after {
-  background-color: var(--primary) !important;
-}
-
+//* Entire list
 .list-block {
   display: flex;
   margin-top: 2rem;
-}
 
-.list-unit .list-status-title {
-  display: flex !important;
-  justify-content: space-between;
-  margin-bottom: 0.5rem;
-  width: 100%;
-  background-color: transparent !important;
-}
+  //* Div with list title, stats, and actual list table
+  .list-unit {
+    width: 1200px;
 
-.list-status-title > .text {
-  display: block !important;
-  padding-left: 1rem;
-  width: fit-content !important;
-  font-size: 1.7rem !important;
-  font-weight: unset !important;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif !important;
-}
+    .list-status-title {
+      display: flex !important;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+      width: 100%;
+      background-color: transparent !important;
 
-.list-unit {
-  width: 1200px;
+      .text {
+        display: block !important;
+        padding-left: 1rem;
+        width: fit-content !important;
+        font-size: 1.7rem !important;
+        font-weight: unset !important;
+        font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif !important;
+      }
 
-  .list-status-title .stats {
-    position: unset;
-  }
-}
-
-.list-stats {
-  border-radius: 5px;
-  width: unset !important;
-  background-color: var(--primarydark) !important;
-}
-
-//* Increase table width
-.list-table {
-  width: 1200px;
-
-  > tbody {
-    //* Calculate width of title column from table width
-    &:first-of-type .title {
-      width: calc(1200px - 580px);
+      .stats {
+        position: unset;
+      }
     }
 
-    &:nth-of-type(2n+1) {
-      background-color: unset;
-    }
-  }
-}
-
-.header-title {
-  background: transparent !important;
-  border-bottom: 0 !important;
-
-  * {
-    color: white !important;
-  }
-}
-
-.list-table {
-  .list-table-data .data {
-    border: 0;
-
-    &.image .image {
-      border: 0;
+    //* Stats showing types of animes, no. of episodes, etc.
+    .list-stats {
       border-radius: 5px;
-      height: 100px;
-      //* Calculate width from height with aspect ratio 17/12
-      width: calc(100px / 17 * 12);
-    }
-  }
-
-  > tbody {
-    &:nth-of-type(2) .status {
-      border-radius: 5px 5px 0 0;
+      width: unset !important;
+      background-color: var(--primarydark) !important;
     }
 
-    &:nth-last-of-type(1) .status {
-      border-radius: 0 0 5px 5px;
-    }
-  }
+    //* Actual list table styling
+    .list-table {
+      //* Increase table width
+      width: 1200px;
+      display: block;
+      padding: 0.25rem;
+      border: 0 !important;
+      border-radius: 15px;
+      background-color: var(--bg-darker);
 
-  .more-info {
-    animation: infoOpen 150ms;
+      > * {
+        border: 0;
+      }
+
+      > tbody {
+        background: transparent;
+
+        //* Calculate width of title column from table width
+        &:first-of-type .title {
+          width: calc(1200px - 580px);
+        }
+
+        &:nth-of-type(2n+1) {
+          background-color: unset;
+        }
+
+        //* Remove borders and make table items look nice
+        &:nth-of-type(2) .status {
+          border-radius: 5px 5px 0 0;
+        }
+
+        &:nth-last-of-type(1) .status {
+          border-radius: 0 0 5px 5px;
+        }
+      }
+
+      .list-table-header {
+        .header-title {
+          background: transparent !important;
+          border-bottom: 0 !important;
+        
+          * {
+            color: white !important;
+          }
+        }
+      }
+
+      .list-table-data {
+        color: white !important;
+        
+        a.edit-disabled {
+          color: white;
+        }
+
+        .data {
+          border: 0;
+
+          &.image .image {
+            border: 0;
+            border-radius: 5px;
+            height: 100px;
+            //* Calculate width from height with aspect ratio 17/12
+            width: calc(100px / 17 * 12);
+          }
+        }
+      }
+
+      .more-info {
+        animation: infoOpen 150ms;
+      }
+    }
   }
 }
 
+//* Footer
 #footer-block {
   background-color: var(--primarydark);
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif !important;
 
-  &::before {
-    content: '❤ This theme was created with love for my wife Sabrina ❤';
-    font-size: 1rem;
+  #copyright {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    &::before {
+      content: '❤ This theme was created with love for my wife Sabrina ❤';
+      font-size: 1rem;
+    }
   }
 
   * {
