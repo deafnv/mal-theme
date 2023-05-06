@@ -1,0 +1,7 @@
+# Site resources
+*.html
+*/
+
+# Compiled CSS
+*.css
+*.css.map

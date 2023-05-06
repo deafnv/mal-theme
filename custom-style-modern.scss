@@ -1,0 +1,559 @@
+:root {
+  --profile-image:url("");
+  --bg:#363636;
+  --bg-lighter:#727272;
+  --bg-darker:#0e000c;
+  --primary:#FF6FD4;
+  --primarydark:#b16385;
+  --secondary:#0077ff;
+  --header-image:url("");
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 3px;
+  border: 0px solid hsl(0, 0%, 27%);
+  border-top: 0;
+  border-bottom: 0;
+}
+
+::-webkit-scrollbar-corner {
+  display: none;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: #8f8f8f;
+
+  &:hover {
+    background: #555;
+  }
+}
+
+input {
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  background-color: var(--bg-lighter) !important;
+  color: white !important;
+  border: 1px solid var(--bg-lighter) !important;
+  border-width: 1px;
+  border-radius: 3px;
+  transition: border-color 100ms;
+
+  &:focus {
+    outline: none;
+    border-color: var(--primary) !important;
+  }
+}
+
+html, body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif !important;
+}
+
+body {
+  background-image: none !important;
+  background-color: var(--bg) !important;
+  color: white;
+}
+
+a {
+  color: var(--primary);
+}
+
+#list-container, .list-table-header, .list-item {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+table {
+  display: block;
+  padding: 0.25rem;
+  border: 0 !important;
+  border-radius: 15px;
+  background-color: var(--bg-darker);
+
+  > * {
+    border: 0;
+  }
+}
+
+tbody {
+  background: transparent;
+}
+
+#list-container {
+  position: unset;
+  margin-top: 300px;
+  margin-left: unset;
+  margin-right: unset;
+  border: 0;
+  width: 100%;
+}
+
+.cover-block {
+  position: absolute;
+  top: 46px;
+  left: 0;
+  margin: unset;
+  width: 100%;
+}
+
+#cover-image-container {
+  position: relative;
+  display: block;
+  padding-top: unset;
+  width: 100%;
+
+  &::before {
+    content: '';
+    position: absolute;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 30%, var(--bg) 90%);
+    pointer-events: none;
+  }
+}
+
+#cover-image {
+  content: var(--header-image);
+  object-fit: cover;
+  height: 300px;
+  width: 100%;
+  max-width: 100%;
+}
+
+.header {
+  position: absolute;
+  top: 210px;
+  left: calc((100vw - 1200px) / 2 + 15px);
+  z-index: 5;
+
+  .header-title {
+    display: none;
+  }
+
+  .header-menu {
+    position: unset;
+
+    .btn-menu {
+      font-size: 0;
+
+      a.username {
+        position: absolute;
+        top: -1rem;
+        left: 4.5rem;
+        color: var(--primary);
+        font-size: 1.5rem;
+
+        &::after {
+          content: '';
+          position: absolute;
+          top: 1.1rem;
+          left: -4.45rem;
+          display: block;
+          margin-right: 1rem;
+          border-radius: 50%;
+          height: 3rem;
+          width: 3rem;
+          background-image: var(--profile-image) !important;
+          background-size: cover;
+          transform: scale(1.4);
+        }
+      }
+
+      > :not(a.username) {
+        display: none;
+      }
+    }
+
+    .header-info {
+      position: absolute;
+      left: 4.4rem;
+      bottom: -0.6rem;
+    }
+
+    .list-menu {
+      .icon-menu {
+        height: 25px;
+        width: 32px;
+
+        &:hover {
+          background-color: unset;
+        }
+      }
+
+      display: block;
+      top: 3.8rem;
+      left: 0.5rem;
+      right: unset;
+      padding: 3px 0;
+      border: 0;
+      border-radius: 50px;
+      background-color: var(--primarydark);
+
+      //* Link to switch lists tooltip show on hover
+      &:hover {
+        background-color: var(--primary);
+
+        .text {
+          opacity: 1;
+        }
+
+        svg {
+          fill: black !important;
+        }
+      }
+
+      a {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        gap: 0.6rem;
+      }
+
+      .icon-menu > * {
+        position: unset !important;
+      }
+
+      //* Link to switch lists tooltip
+      .text {
+        opacity: 0;
+        position: absolute !important;
+        top: 0 !important;
+        left: 2.5rem !important;
+        padding: 0.4rem;
+        border-radius: 15px;
+        width: max-content;
+        color: white;
+        background-color: var(--primary);
+        pointer-events: none;
+        transition: opacity 100ms ease-in-out;
+      }
+
+      //* Link to switch lists
+      svg {
+        height: 16px;
+        width: 16px;
+        fill: white !important;
+      }
+    }
+  }
+}
+
+//* Positioning of entire list, including table
+.list-menu-float {
+  position: absolute;
+  z-index: 10;
+  top: 210px;
+
+  //* Place user details left aligned to table width: 1200px here
+  left: calc((100vw - 1200px) / 2 + 15px);
+  display: flex;
+  flex-wrap: wrap;
+  border: none;
+  width: 1200px;
+  //* Fix for flex offset blocking clicks on profile image (set none for weird offset parent, then set back to all for children
+  pointer-events: none;
+
+  * {
+    pointer-events: all;
+  }
+}
+
+.list-table .list-table-data a {
+  color: white !important;
+}
+
+.list-menu-float .icon-menu.profile {
+  margin-right: 1rem;
+  border-radius: 50%;
+  transform: scale(1.4);
+  pointer-events: all;
+  visibility: visible;
+
+  &::after {
+    content: 'Viewing your own list';
+    position: absolute;
+    top: -0.3rem;
+    left: 3.6rem;
+    width: max-content;
+    font-size: 1.1rem;
+    font-weight: bold;
+  }
+}
+
+//* If client is viewing someones list, show custom picture variable, else show own profile picture
+.header:has(a.username) ~ .list-menu-float .icon-menu.profile {
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.list-menu-float .icon-menu {
+  &:not(.profile) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    width: 40px;
+    background-color: var(--primarydark);
+    transform: translateY(1.2rem);
+    transition-duration: 100ms !important;
+  }
+
+  &:not(.profile, .setting) {
+    .text {
+      position: absolute;
+      top: 3rem;
+      left: 0;
+      padding: 0.3rem;
+      border-radius: 15px;
+      width: auto;
+      background-color: var(--primary);
+      transition-duration: 100ms;
+    }
+
+    &:hover {
+      position: unset;
+      background-color: var(--primary);
+      width: 40px;
+    }
+  }
+
+  &:hover svg.icon {
+    fill: initial !important;
+  }
+
+  &:not(.setting) {
+    svg.icon {
+      position: unset;
+      fill: white;
+    }
+
+    &:hover svg.icon {
+      position: unset;
+    }
+
+    .text {
+      pointer-events: none;
+    }
+  }
+}
+
+.link-list-setting, .link-style-setting {
+  background-color: var(--primarydark) !important;
+}
+
+.list-menu-float {
+  .icon-menu {
+    &:not(.profile) {
+      &:last-child {
+        border-radius: 0 50% 50% 0;
+      }
+
+      &:nth-child(2) {
+        border-radius: 50% 0 0 50%;
+      }
+    }
+
+    &.setting {
+      margin-left: 1rem;
+      border-radius: 50% !important;
+      cursor: pointer;
+
+      &:hover {
+        background-color: var(--primary);
+        width: 40px;
+
+        svg {
+          fill: black !important;
+        }
+      }
+
+      svg {
+        left: unset !important;
+        top: unset !important;
+        fill: white !important;
+      }
+
+      .text {
+        left: 40px;
+
+        > a {
+          transition: background-color 100ms ease-in-out;
+
+          &:first-child {
+            border-radius: 5px 5px 0 0;
+          }
+
+          &:last-child {
+            border-radius: 0 0 5px 5px;
+          }
+
+          &:hover {
+            background-color: var(--primary) !important;
+          }
+        }
+      }
+    }
+  }
+
+  > form {
+    pointer-events: none;
+  }
+}
+
+//* Top navbar 
+#status-menu {
+  position: fixed;
+  top: 0;
+  border: none;
+  width: 100%;
+  background: var(--primarydark);
+  transition: all 150ms;
+}
+
+#list-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 46px;
+  width: 100%;
+  background: var(--primarydark);
+}
+
+.status-menu-container {
+  position: fixed;
+  z-index: 50;
+  background: rgba(177, 99, 133, 0.82) !important;
+  box-shadow: 0 rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+#status-menu a {
+  color: white;
+}
+
+.status-menu .status-button:after {
+  background-color: var(--primary) !important;
+}
+
+.list-block {
+  display: flex;
+  margin-top: 2rem;
+}
+
+.list-unit .list-status-title {
+  display: flex !important;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  width: 100%;
+  background-color: transparent !important;
+}
+
+.list-status-title > .text {
+  display: block !important;
+  padding-left: 1rem;
+  width: fit-content !important;
+  font-size: 1.7rem !important;
+  font-weight: unset !important;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif !important;
+}
+
+.list-unit {
+  width: 1200px;
+
+  .list-status-title .stats {
+    position: unset;
+  }
+}
+
+.list-stats {
+  border-radius: 5px;
+  width: unset !important;
+  background-color: var(--primarydark) !important;
+}
+
+//* Increase table width
+.list-table {
+  width: 1200px;
+
+  > tbody {
+    //* Calculate width of title column from table width
+    &:first-of-type .title {
+      width: calc(1200px - 580px);
+    }
+
+    &:nth-of-type(2n+1) {
+      background-color: unset;
+    }
+  }
+}
+
+.header-title {
+  background: transparent !important;
+  border-bottom: 0 !important;
+
+  * {
+    color: white !important;
+  }
+}
+
+.list-table {
+  .list-table-data .data {
+    border: 0;
+
+    &.image .image {
+      border: 0;
+      border-radius: 5px;
+      height: 100px;
+      //* Calculate width from height with aspect ratio 17/12
+      width: calc(100px / 17 * 12);
+    }
+  }
+
+  > tbody {
+    &:nth-of-type(2) .status {
+      border-radius: 5px 5px 0 0;
+    }
+
+    &:nth-last-of-type(1) .status {
+      border-radius: 0 0 5px 5px;
+    }
+  }
+
+  .more-info {
+    animation: infoOpen 150ms;
+  }
+}
+
+#footer-block {
+  background-color: var(--primarydark);
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif !important;
+
+  &::before {
+    content: '❤ This theme was created with love for my wife Sabrina ❤';
+    font-size: 1rem;
+  }
+
+  * {
+    color: white !important;
+  }
+}
+
+@keyframes infoOpen {
+  0% {}
+}
