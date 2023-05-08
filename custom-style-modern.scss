@@ -6,7 +6,7 @@
   --primary: #ffc16f;
   --secondary: rgba(218, 51, 0, 0.733);
   --text-color: white;
-  --banner-scroll-duration: 2s; /* Banner scroll speed, 0s to disable */
+  --banner-scroll-duration: 15s; /* Banner scroll speed, 0s to disable */
   --banner-image: url("");
   --banner-image-two: url(""); /* Second banner image to show if scroll enabled */
   --bg-image: url("");
@@ -85,7 +85,7 @@ a {
 //* Main content parent div
 #list-container {
   position: unset;
-  margin-top: var(--banner-height);
+  margin-top: calc(var(--banner-height) + 50px);
   margin-left: unset;
   margin-right: unset;
   border: 0;
@@ -110,6 +110,7 @@ a {
   left: 0;
   margin: unset;
   width: 100%;
+  overflow-x: clip;
 
   &::after {
     content: '';
@@ -184,6 +185,19 @@ a {
   left: calc((100vw - var(--table-width)) / 2 + 15px);
   z-index: 5;
 
+  //* User details backdrop
+  &::before {
+    content: '';
+    position: absolute;
+    top: -2rem;
+    left: -1.2rem;
+    display: block;
+    height: 150px;
+    width: 440px;
+    border-radius: 15px;
+    background-color: var(--bg-darker);
+  }
+
   //* MyAnimeList logo, disabled
   .header-title {
     display: none;
@@ -202,7 +216,7 @@ a {
       a.username {
         position: absolute;
         top: -1rem;
-        left: 4.5rem;
+        left: 5.5rem;
         color: var(--primary);
         font-size: 1.5rem;
 
@@ -232,7 +246,7 @@ a {
     //* Shared anime, affinity and history
     .header-info {
       position: absolute;
-      left: 4.4rem;
+      left: 5.4rem;
       bottom: -0.6rem;
       color: var(--text-color);
 
@@ -245,7 +259,7 @@ a {
     .list-menu {
       display: block;
       top: 3.8rem;
-      left: 0.5rem;
+      left: 1.5rem;
       right: unset;
       padding: 3px 0;
       border: 0;
@@ -315,7 +329,7 @@ a {
   top: calc(var(--banner-height) - 90px);
 
   //* Place user details left aligned to table width
-  left: calc((100vw - var(--table-width)) / 2 + 15px);
+  left: calc((100vw - var(--table-width)) / 2 + 30px);
   display: flex;
   flex-wrap: wrap;
   border: none;
@@ -492,7 +506,6 @@ a {
 //* Entire list
 .list-block {
   display: flex;
-  margin-top: 2rem;
 
   //* Left side
   &::before {
