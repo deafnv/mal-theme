@@ -1,13 +1,17 @@
 :root {
-  --profile-image:url("");
-  --bg:#363636;
-  --bg-lighter:#727272;
-  --bg-darker:#0e000c;
-  --primary:#FF6FD4;
-  --primarydark:#b16385;
-  --secondary:#0077ff;
-  --header-image:url("");
-  --table-width:1200px;
+  --profile-image: url("");
+  --bg: #363636;
+  --bg-lighter: #727272;
+  --bg-darker: rgba(14, 0, 12, 0.644);
+  --primary: #d3994d;
+  --secondary: rgba(218, 51, 0, 0.733);
+  --text-color: white;
+  --header-image: url("");
+  --bg-image: url("");
+  --left-image: url(""); /* Image left of table */
+  --right-image: url(""); /* Image right of table */
+  --banner-height: 300px;
+  --table-width: 1200px;
 }
 
 ::-webkit-scrollbar {
@@ -23,7 +27,7 @@
 }
 
 ::-webkit-scrollbar-track {
-  border-radius: 4px;
+  background-color: #3b3b3b;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -38,7 +42,7 @@
 input {
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   background-color: var(--bg-lighter) !important;
-  color: white !important;
+  color: var(--text-color) !important;
   border: 1px solid var(--bg-lighter) !important;
   border-width: 1px;
   border-radius: 3px;
@@ -61,9 +65,10 @@ a {
 }
 
 body {
-  background-image: none !important;
+  background-image: var(--bg-image) !important;
+  background-size: cover;
   background-color: var(--bg) !important;
-  color: white;
+  color: var(--text-color);
 }
 
 a {
@@ -78,7 +83,7 @@ a {
 //* Main content parent div
 #list-container {
   position: unset;
-  margin-top: 300px;
+  margin-top: var(--banner-height);
   margin-left: unset;
   margin-right: unset;
   border: 0;
@@ -92,7 +97,7 @@ a {
     left: 0;
     height: 46px;
     width: 100%;
-    background: var(--primarydark);
+    background: var(--secondary);
   }
 }
 
@@ -114,7 +119,7 @@ a {
     #cover-image {
       content: var(--header-image);
       object-fit: cover;
-      height: 300px;
+      height: var(--banner-height);
       width: 100%;
       max-width: 100%;
     }
@@ -136,7 +141,7 @@ a {
 //* Originally top part showing MAL logo, used for profile link
 .header {
   position: absolute;
-  top: 210px;
+  top: calc(var(--banner-height) - 90px);
   //* Position left aligned to table
   left: calc((100vw - var(--table-width)) / 2 + 15px);
   z-index: 5;
@@ -191,6 +196,11 @@ a {
       position: absolute;
       left: 4.4rem;
       bottom: -0.6rem;
+      color: var(--text-color);
+
+      a {
+        color: var(--primary);
+      }
     }
 
     //* Switch lists button
@@ -202,7 +212,7 @@ a {
       padding: 3px 0;
       border: 0;
       border-radius: 50px;
-      background-color: var(--primarydark);
+      background-color: var(--secondary);
 
       //* Switch lists anchor element
       .icon-menu {
@@ -230,7 +240,7 @@ a {
           padding: 0.4rem;
           border-radius: 15px;
           width: max-content;
-          color: white;
+          color: var(--text-color);
           background-color: var(--primary);
           pointer-events: none;
           transition: opacity 100ms ease-in-out;
@@ -240,7 +250,7 @@ a {
         svg {
           height: 16px;
           width: 16px;
-          fill: white !important;
+          fill: var(--text-color) !important;
         }
       }
 
@@ -264,7 +274,7 @@ a {
 .list-menu-float {
   position: absolute;
   z-index: 10;
-  top: 210px;
+  top: calc(var(--banner-height) - 90px);
 
   //* Place user details left aligned to table width
   left: calc((100vw - var(--table-width)) / 2 + 15px);
@@ -312,7 +322,7 @@ a {
     justify-content: center;
     height: 40px;
     width: 40px;
-    background-color: var(--primarydark);
+    background-color: var(--secondary);
     transform: translateY(1.2rem);
     transition-duration: 100ms !important;
   }
@@ -343,7 +353,7 @@ a {
   &:not(.setting) {
     svg.icon {
       position: unset;
-      fill: white;
+      fill: var(--text-color);
     }
 
     &:hover svg.icon {
@@ -357,7 +367,7 @@ a {
 }
 
 .link-list-setting, .link-style-setting {
-  background-color: var(--primarydark) !important;
+  background-color: var(--secondary) !important;
 }
 
 .list-menu-float {
@@ -389,7 +399,7 @@ a {
       svg {
         left: unset !important;
         top: unset !important;
-        fill: white !important;
+        fill: var(--text-color) !important;
       }
 
       .text {
@@ -426,14 +436,14 @@ a {
   z-index: 50;
   width: 100%;
   border: none;
-  background: rgba(177, 99, 133, 0.82) !important;
+  background: var(--secondary) !important;
   box-shadow: 0 rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
   transition: all 150ms;
 
   a {
-    color: white !important;
+    color: var(--text-color) !important;
   }
 
   .status-menu .status-button:after {
@@ -446,8 +456,25 @@ a {
   display: flex;
   margin-top: 2rem;
 
+  //* Left side
+  &::before {
+    content: '';
+    width: calc((100vw - var(--table-width)) / 2);
+    background-image: var(--left-image);
+    background-size: contain;
+  }
+
+  //* Right side
+  &::after {
+    content: '';
+    width: calc((100vw - var(--table-width)) / 2);
+    background-image: var(--right-image);
+    background-size: contain;
+  }
+
   //* Div with list title, stats, and actual list table
   .list-unit {
+    margin: 0;
     width: var(--table-width);
 
     .list-status-title {
@@ -468,6 +495,10 @@ a {
 
       .stats {
         position: unset;
+
+        a {
+          color: var(--primary);
+        }
       }
     }
 
@@ -475,7 +506,7 @@ a {
     .list-stats {
       border-radius: 5px;
       width: unset !important;
-      background-color: var(--primarydark) !important;
+      background-color: var(--secondary) !important;
     }
 
     //* Actual list table styling
@@ -487,6 +518,8 @@ a {
       border: 0 !important;
       border-radius: 15px;
       background-color: var(--bg-darker);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
 
       > * {
         border: 0;
@@ -520,16 +553,16 @@ a {
           border-bottom: 0 !important;
         
           * {
-            color: white !important;
+            color: var(--text-color) !important;
           }
         }
       }
 
       .list-table-data {
-        color: white !important;
+        color: var(--text-color) !important;
         
         a.edit-disabled {
-          color: white;
+          color: var(--text-color);
         }
 
         .data {
@@ -554,7 +587,7 @@ a {
 
 //* Footer
 #footer-block {
-  background-color: var(--primarydark);
+  background-color: var(--secondary);
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif !important;
 
   #copyright {
@@ -569,7 +602,7 @@ a {
   }
 
   * {
-    color: white !important;
+    color: var(--text-color) !important;
   }
 }
 

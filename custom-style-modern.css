@@ -1,0 +1,495 @@
+@charset "UTF-8";
+:root {
+  --profile-image: url("");
+  --bg: #363636;
+  --bg-lighter: #727272;
+  --bg-darker: rgba(14, 0, 12, 0.644);
+  --primary: #d3994d;
+  --secondary: rgba(218, 51, 0, 0.733);
+  --text-color: white;
+  --header-image: url("");
+  --bg-image: url("");
+  --left-image: url(""); /* Image left of table */
+  --right-image: url(""); /* Image right of table */
+  --banner-height: 300px;
+  --table-width: 1200px;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 3px;
+  border: 0px solid hsl(0, 0%, 27%);
+  border-top: 0;
+  border-bottom: 0;
+}
+
+::-webkit-scrollbar-corner {
+  display: none;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #3b3b3b;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: #8f8f8f;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+input {
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  background-color: var(--bg-lighter) !important;
+  color: var(--text-color) !important;
+  border: 1px solid var(--bg-lighter) !important;
+  border-width: 1px;
+  border-radius: 3px;
+  transition: border-color 100ms;
+}
+input:focus {
+  outline: none;
+  border-color: var(--primary) !important;
+}
+
+html, body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif !important;
+}
+
+body {
+  background-image: var(--bg-image) !important;
+  background-size: cover;
+  background-color: var(--bg) !important;
+  color: var(--text-color);
+}
+
+a {
+  color: var(--primary);
+}
+
+#list-container, .list-table-header, .list-item {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+#list-container {
+  position: unset;
+  margin-top: var(--banner-height);
+  margin-left: unset;
+  margin-right: unset;
+  border: 0;
+  width: 100%;
+}
+#list-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 46px;
+  width: 100%;
+  background: var(--secondary);
+}
+
+.cover-block {
+  position: absolute;
+  top: 46px;
+  left: 0;
+  margin: unset;
+  width: 100%;
+}
+.cover-block #cover-image-container {
+  position: relative;
+  display: block;
+  padding-top: unset;
+  width: 100%;
+}
+.cover-block #cover-image-container #cover-image {
+  content: var(--header-image);
+  object-fit: cover;
+  height: var(--banner-height);
+  width: 100%;
+  max-width: 100%;
+}
+.cover-block #cover-image-container::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 30%, var(--bg) 90%);
+  pointer-events: none;
+}
+
+.header {
+  position: absolute;
+  top: calc(var(--banner-height) - 90px);
+  left: calc((100vw - var(--table-width)) / 2 + 15px);
+  z-index: 5;
+}
+.header .header-title {
+  display: none;
+  z-index: 1000;
+  left: 200px;
+  text-indent: 0px;
+}
+.header .header-menu {
+  position: unset;
+}
+.header .header-menu .btn-menu {
+  font-size: 0;
+}
+.header .header-menu .btn-menu a.username {
+  position: absolute;
+  top: -1rem;
+  left: 4.5rem;
+  color: var(--primary);
+  font-size: 1.5rem;
+}
+.header .header-menu .btn-menu a.username::after {
+  content: "";
+  position: absolute;
+  top: 1.1rem;
+  left: -4.45rem;
+  display: block;
+  margin-right: 1rem;
+  border-radius: 50%;
+  height: 3rem;
+  width: 3rem;
+  background-image: var(--profile-image) !important;
+  background-size: cover;
+  transform: scale(1.4);
+}
+.header .header-menu .btn-menu > :not(a.username) {
+  display: none;
+}
+.header .header-menu .header-info {
+  position: absolute;
+  left: 4.4rem;
+  bottom: -0.6rem;
+  color: var(--text-color);
+}
+.header .header-menu .header-info a {
+  color: var(--primary);
+}
+.header .header-menu .list-menu {
+  display: block;
+  top: 3.8rem;
+  left: 0.5rem;
+  right: unset;
+  padding: 3px 0;
+  border: 0;
+  border-radius: 50px;
+  background-color: var(--secondary);
+}
+.header .header-menu .list-menu .icon-menu {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  height: 25px;
+  width: 32px;
+}
+.header .header-menu .list-menu .icon-menu:hover {
+  background-color: unset;
+}
+.header .header-menu .list-menu .icon-menu > * {
+  position: unset !important;
+}
+.header .header-menu .list-menu .icon-menu .text {
+  opacity: 0;
+  position: absolute !important;
+  top: 0 !important;
+  left: 2.5rem !important;
+  padding: 0.4rem;
+  border-radius: 15px;
+  width: max-content;
+  color: var(--text-color);
+  background-color: var(--primary);
+  pointer-events: none;
+  transition: opacity 100ms ease-in-out;
+}
+.header .header-menu .list-menu .icon-menu svg {
+  height: 16px;
+  width: 16px;
+  fill: var(--text-color) !important;
+}
+.header .header-menu .list-menu:hover {
+  background-color: var(--primary);
+}
+.header .header-menu .list-menu:hover .text {
+  opacity: 1;
+}
+.header .header-menu .list-menu:hover svg {
+  fill: black !important;
+}
+
+.list-menu-float {
+  position: absolute;
+  z-index: 10;
+  top: calc(var(--banner-height) - 90px);
+  left: calc((100vw - var(--table-width)) / 2 + 15px);
+  display: flex;
+  flex-wrap: wrap;
+  border: none;
+  width: var(--table-width);
+  pointer-events: none;
+}
+.list-menu-float * {
+  pointer-events: all;
+}
+
+.list-menu-float .icon-menu.profile {
+  margin-right: 1rem;
+  border-radius: 50%;
+  transform: scale(1.4);
+  pointer-events: all;
+  visibility: visible;
+}
+.list-menu-float .icon-menu.profile::after {
+  content: "Viewing your own list";
+  position: absolute;
+  top: -0.3rem;
+  left: 3.6rem;
+  width: max-content;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.header:has(a.username) ~ .list-menu-float .icon-menu.profile {
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.list-menu-float .icon-menu:not(.profile) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  width: 40px;
+  background-color: var(--secondary);
+  transform: translateY(1.2rem);
+  transition-duration: 100ms !important;
+}
+.list-menu-float .icon-menu:not(.profile, .setting) .text {
+  position: absolute;
+  top: 3rem;
+  left: 0;
+  padding: 0.3rem;
+  border-radius: 15px;
+  width: auto;
+  background-color: var(--primary);
+  transition-duration: 100ms;
+}
+.list-menu-float .icon-menu:not(.profile, .setting):hover {
+  position: unset;
+  background-color: var(--primary);
+  width: 40px;
+}
+.list-menu-float .icon-menu:hover svg.icon {
+  fill: initial !important;
+}
+.list-menu-float .icon-menu:not(.setting) svg.icon {
+  position: unset;
+  fill: var(--text-color);
+}
+.list-menu-float .icon-menu:not(.setting):hover svg.icon {
+  position: unset;
+}
+.list-menu-float .icon-menu:not(.setting) .text {
+  pointer-events: none;
+}
+
+.link-list-setting, .link-style-setting {
+  background-color: var(--secondary) !important;
+}
+
+.list-menu-float .icon-menu:not(.profile):last-child {
+  border-radius: 0 50% 50% 0;
+}
+.list-menu-float .icon-menu:not(.profile):nth-child(2) {
+  border-radius: 50% 0 0 50%;
+}
+.list-menu-float .icon-menu.setting {
+  margin-left: 1rem;
+  border-radius: 50% !important;
+  cursor: pointer;
+}
+.list-menu-float .icon-menu.setting:hover {
+  background-color: var(--primary);
+  width: 40px;
+}
+.list-menu-float .icon-menu.setting:hover svg {
+  fill: black !important;
+}
+.list-menu-float .icon-menu.setting svg {
+  left: unset !important;
+  top: unset !important;
+  fill: var(--text-color) !important;
+}
+.list-menu-float .icon-menu.setting .text {
+  left: 40px;
+}
+.list-menu-float .icon-menu.setting .text > a {
+  transition: background-color 100ms ease-in-out;
+}
+.list-menu-float .icon-menu.setting .text > a:first-child {
+  border-radius: 5px 5px 0 0;
+}
+.list-menu-float .icon-menu.setting .text > a:last-child {
+  border-radius: 0 0 5px 5px;
+}
+.list-menu-float .icon-menu.setting .text > a:hover {
+  background-color: var(--primary) !important;
+}
+.list-menu-float > form {
+  pointer-events: none;
+}
+
+.status-menu-container {
+  position: fixed;
+  top: 0;
+  z-index: 50;
+  width: 100%;
+  border: none;
+  background: var(--secondary) !important;
+  box-shadow: 0 rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  transition: all 150ms;
+}
+.status-menu-container a {
+  color: var(--text-color) !important;
+}
+.status-menu-container .status-menu .status-button:after {
+  background-color: var(--primary) !important;
+}
+
+.list-block {
+  display: flex;
+  margin-top: 2rem;
+}
+.list-block::before {
+  content: "";
+  width: calc((100vw - var(--table-width)) / 2);
+  background-image: var(--left-image);
+  background-size: contain;
+}
+.list-block::after {
+  content: "";
+  width: calc((100vw - var(--table-width)) / 2);
+  background-image: var(--right-image);
+  background-size: contain;
+}
+.list-block .list-unit {
+  margin: 0;
+  width: var(--table-width);
+}
+.list-block .list-unit .list-status-title {
+  display: flex !important;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  width: 100%;
+  background-color: transparent !important;
+}
+.list-block .list-unit .list-status-title .text {
+  display: block !important;
+  padding-left: 1rem;
+  width: fit-content !important;
+  font-size: 1.7rem !important;
+  font-weight: unset !important;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif !important;
+}
+.list-block .list-unit .list-status-title .stats {
+  position: unset;
+}
+.list-block .list-unit .list-status-title .stats a {
+  color: var(--primary);
+}
+.list-block .list-unit .list-stats {
+  border-radius: 5px;
+  width: unset !important;
+  background-color: var(--secondary) !important;
+}
+.list-block .list-unit .list-table {
+  width: var(--table-width);
+  display: block;
+  padding: 0.25rem;
+  border: 0 !important;
+  border-radius: 15px;
+  background-color: var(--bg-darker);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+.list-block .list-unit .list-table > * {
+  border: 0;
+}
+.list-block .list-unit .list-table > tbody {
+  background: transparent;
+}
+.list-block .list-unit .list-table > tbody:first-of-type .title {
+  width: calc(var(--table-width) - 580px);
+}
+.list-block .list-unit .list-table > tbody:nth-of-type(2n+1) {
+  background-color: unset;
+}
+.list-block .list-unit .list-table > tbody:nth-of-type(2) .status {
+  border-radius: 5px 5px 0 0;
+}
+.list-block .list-unit .list-table > tbody:nth-last-of-type(1) .status {
+  border-radius: 0 0 5px 5px;
+}
+.list-block .list-unit .list-table .list-table-header .header-title {
+  background: transparent !important;
+  border-bottom: 0 !important;
+}
+.list-block .list-unit .list-table .list-table-header .header-title * {
+  color: var(--text-color) !important;
+}
+.list-block .list-unit .list-table .list-table-data {
+  color: var(--text-color) !important;
+}
+.list-block .list-unit .list-table .list-table-data a.edit-disabled {
+  color: var(--text-color);
+}
+.list-block .list-unit .list-table .list-table-data .data {
+  border: 0;
+}
+.list-block .list-unit .list-table .list-table-data .data.image .image {
+  border: 0;
+  border-radius: 5px;
+  height: 100px;
+  width: 70.5882352941px;
+}
+.list-block .list-unit .list-table .more-info {
+  animation: infoOpen 150ms;
+}
+
+#footer-block {
+  background-color: var(--secondary);
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif !important;
+}
+#footer-block #copyright {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+#footer-block #copyright::before {
+  content: "❤ This theme was created with love for my wife Sabrina ❤";
+  font-size: 1rem;
+}
+#footer-block * {
+  color: var(--text-color) !important;
+}
+
+@keyframes infoOpen {}
+
+/*# sourceMappingURL=custom-style-modern.css.map */

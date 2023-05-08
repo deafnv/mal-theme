@@ -2,6 +2,5 @@
 *.html
 */
 
-# Compiled CSS
-*.css
+# Compiled CSS source map
 *.css.map
