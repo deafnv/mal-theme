@@ -1,15 +1,17 @@
 :root {
   --profile-image: url("");
-  --bg: #363636;
+  --bg: rgba(145, 34, 0, 0.984);
   --bg-lighter: #727272;
   --bg-darker: rgba(14, 0, 12, 0.644);
-  --primary: #d3994d;
+  --primary: #ffc16f;
   --secondary: rgba(218, 51, 0, 0.733);
   --text-color: white;
-  --header-image: url("");
+  --banner-scroll-duration: 2s; /* Banner scroll speed, 0s to disable */
+  --banner-image: url("");
+  --banner-image-two: url(""); /* Second banner image to show if scroll enabled */
   --bg-image: url("");
-  --left-image: url(""); /* Image left of table */
-  --right-image: url(""); /* Image right of table */
+  --left-image: url("");
+  --right-image: url("");
   --banner-height: 300px;
   --table-width: 1200px;
 }
@@ -109,6 +111,19 @@ a {
   margin: unset;
   width: 100%;
 
+  &::after {
+    content: '';
+    position: absolute;
+    height: var(--banner-height);
+    z-index: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 30%, var(--bg) 90%);
+    pointer-events: none;
+  }
+
   #cover-image-container {
     position: relative;
     display: block;
@@ -117,23 +132,46 @@ a {
   
     //* Banner img element
     #cover-image {
-      content: var(--header-image);
+      content: url(data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==);
       object-fit: cover;
+      position: absolute;
+      left: 100%;
       height: var(--banner-height);
       width: 100%;
       max-width: 100%;
+      background-image: var(--banner-image-two);
+      background-size: cover;
+      background-position: center;
+      animation: moveSlideshow var(--banner-scroll-duration) linear infinite
     }
-  
+
+    //* Pseudo-elements for infinite scrolling
     &::before {
       content: '';
       position: absolute;
-      z-index: 0;
       top: 0;
       left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 30%, var(--bg) 90%);
-      pointer-events: none;
+      display: block;
+      height: var(--banner-height);
+      width: 100%;
+      background-image: var(--banner-image);
+      background-size: cover;
+      background-position: center;
+      animation: moveSlideshow var(--banner-scroll-duration) linear infinite
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 200%;
+      display: block;
+      height: var(--banner-height);
+      width: 100%;
+      background-image: var(--banner-image);
+      background-size: cover;
+      background-position: center;
+      animation: moveSlideshow var(--banner-scroll-duration) linear infinite
     }
   }
 }
@@ -608,4 +646,10 @@ a {
 
 @keyframes infoOpen {
   0% {}
+}
+
+@keyframes moveSlideshow {
+  100% {
+      transform: translateX(-200%)
+  }
 }
