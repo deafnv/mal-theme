@@ -7,6 +7,7 @@
   --primarydark:#b16385;
   --secondary:#0077ff;
   --header-image:url("");
+  --table-width:1200px;
 }
 
 ::-webkit-scrollbar {
@@ -82,6 +83,17 @@ a {
   margin-right: unset;
   border: 0;
   width: 100%;
+
+  //* Navbar background
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 46px;
+    width: 100%;
+    background: var(--primarydark);
+  }
 }
 
 //* Banner image parent
@@ -125,7 +137,8 @@ a {
 .header {
   position: absolute;
   top: 210px;
-  left: calc((100vw - 1200px) / 2 + 15px);
+  //* Position left aligned to table
+  left: calc((100vw - var(--table-width)) / 2 + 15px);
   z-index: 5;
 
   //* MyAnimeList logo, disabled
@@ -253,12 +266,12 @@ a {
   z-index: 10;
   top: 210px;
 
-  //* Place user details left aligned to table width: 1200px here
-  left: calc((100vw - 1200px) / 2 + 15px);
+  //* Place user details left aligned to table width
+  left: calc((100vw - var(--table-width)) / 2 + 15px);
   display: flex;
   flex-wrap: wrap;
   border: none;
-  width: 1200px;
+  width: var(--table-width);
   //* Fix for flex offset blocking clicks on profile image (set none for weird offset parent, then set back to all for children
   pointer-events: none;
 
@@ -406,16 +419,6 @@ a {
   }
 }
 
-#list-container::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 46px;
-  width: 100%;
-  background: var(--primarydark);
-}
-
 //* Top navbar
 .status-menu-container {
   position: fixed;
@@ -445,7 +448,7 @@ a {
 
   //* Div with list title, stats, and actual list table
   .list-unit {
-    width: 1200px;
+    width: var(--table-width);
 
     .list-status-title {
       display: flex !important;
@@ -478,7 +481,7 @@ a {
     //* Actual list table styling
     .list-table {
       //* Increase table width
-      width: 1200px;
+      width: var(--table-width);
       display: block;
       padding: 0.25rem;
       border: 0 !important;
@@ -494,7 +497,7 @@ a {
 
         //* Calculate width of title column from table width
         &:first-of-type .title {
-          width: calc(1200px - 580px);
+          width: calc(var(--table-width) - 580px);
         }
 
         &:nth-of-type(2n+1) {
