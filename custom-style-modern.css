@@ -7,7 +7,7 @@
   --primary: #ffc16f;
   --secondary: rgba(218, 51, 0, 0.733);
   --text-color: white;
-  --banner-scroll-duration: 15s; /* Banner scroll speed, 0s to disable */
+  --banner-scroll-duration: 0s; /* Banner scroll speed, 0s to disable */
   --banner-image: url("");
   --banner-image-two: url(""); /* Second banner image to show if scroll enabled */
   --bg-image: url("");
@@ -104,6 +104,7 @@ a {
   top: 46px;
   left: 0;
   margin: unset;
+  height: var(--banner-height);
   width: 100%;
   overflow-x: clip;
 }
@@ -123,7 +124,8 @@ a {
   position: relative;
   display: block;
   padding-top: unset;
-  width: 100%;
+  height: var(--banner-height);
+  width: auto;
 }
 .cover-block #cover-image-container #cover-image {
   content: url(data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==);
@@ -131,7 +133,7 @@ a {
   position: absolute;
   left: 100%;
   height: var(--banner-height);
-  width: 100%;
+  width: 100vw;
   max-width: 100%;
   background-image: var(--banner-image-two);
   background-size: cover;
@@ -145,7 +147,7 @@ a {
   left: 0;
   display: block;
   height: var(--banner-height);
-  width: 100%;
+  width: 100vw;
   background-image: var(--banner-image);
   background-size: cover;
   background-position: center;
@@ -158,7 +160,7 @@ a {
   left: 200%;
   display: block;
   height: var(--banner-height);
-  width: 100%;
+  width: 100vw;
   background-image: var(--banner-image);
   background-size: cover;
   background-position: center;
@@ -168,8 +170,9 @@ a {
 .header {
   position: absolute;
   top: calc(var(--banner-height) - 90px);
-  left: calc((100vw - var(--table-width)) / 2 + 15px);
+  left: calc((100vw - var(--table-width)) / 2 + 20px);
   z-index: 5;
+  width: 350px;
 }
 .header::before {
   content: "";
@@ -287,7 +290,7 @@ a {
   display: flex;
   flex-wrap: wrap;
   border: none;
-  width: var(--table-width);
+  width: calc(var(--table-width) / 3);
   pointer-events: none;
 }
 .list-menu-float * {
@@ -405,13 +408,16 @@ a {
   position: fixed;
   top: 0;
   z-index: 50;
-  width: 100%;
+  width: 100vw;
+  width: 100dvw;
   border: none;
   background: var(--secondary) !important;
   box-shadow: 0 rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
   transition: all 150ms;
+  white-space: nowrap;
+  overflow-x: auto;
 }
 .status-menu-container a {
   color: var(--text-color) !important;
@@ -438,6 +444,7 @@ a {
 .list-block .list-unit {
   margin: 0;
   width: var(--table-width);
+  max-width: 100%;
 }
 .list-block .list-unit .list-status-title {
   display: flex !important;
@@ -466,7 +473,6 @@ a {
   background-color: var(--secondary) !important;
 }
 .list-block .list-unit .list-table {
-  width: var(--table-width);
   display: block;
   padding: 0.25rem;
   border: 0 !important;
@@ -474,6 +480,7 @@ a {
   background-color: var(--bg-darker);
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
+  overflow-x: auto;
 }
 .list-block .list-unit .list-table > * {
   border: 0;
@@ -520,6 +527,7 @@ a {
 }
 
 #footer-block {
+  width: auto !important;
   background-color: var(--secondary);
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif !important;
 }
@@ -536,6 +544,14 @@ a {
   color: var(--text-color) !important;
 }
 
+@media (max-width: 1250px) {
+  .list-menu-float {
+    left: calc((100vw - var(--table-width)) / 2 + 300px);
+  }
+  .header {
+    left: calc((100vw - var(--table-width)) / 2 + 285px);
+  }
+}
 @keyframes infoOpen {}
 @keyframes moveSlideshow {
   100% {
