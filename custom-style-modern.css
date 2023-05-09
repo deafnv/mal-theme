@@ -11,11 +11,13 @@
   --banner-image: url("");
   --banner-image-two: url(""); /* Second banner image to show if scroll enabled */
   --bg-image: url("");
-  --left-image: url("");
-  --right-image: url("");
   --banner-height: 300px;
   --table-width: 1200px;
   --table-image-size: 100px; /* Size of image preview in table */
+}
+
+#gdpr-modal-bottom {
+  display: none;
 }
 
 ::-webkit-scrollbar {
@@ -84,7 +86,7 @@ a {
 
 #list-container {
   position: unset;
-  margin-top: calc(var(--banner-height) + 50px);
+  margin-top: calc(var(--banner-height) + 45px);
   margin-left: unset;
   margin-right: unset;
   border: 0;
@@ -428,19 +430,19 @@ a {
 }
 
 .list-block {
+  position: relative;
   display: flex;
+  justify-content: center;
 }
 .list-block::before {
   content: "";
-  width: calc((100vw - var(--table-width)) / 2);
-  background-image: var(--left-image);
-  background-size: contain;
-}
-.list-block::after {
-  content: "";
-  width: calc((100vw - var(--table-width)) / 2);
-  background-image: var(--right-image);
-  background-size: contain;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -10;
+  background: linear-gradient(to bottom, var(--bg) 0%, rgba(255, 255, 255, 0) 3%, rgba(255, 255, 255, 0) 97%, var(--secondary) 100%);
 }
 .list-block .list-unit {
   margin: 0;
@@ -501,8 +503,7 @@ a {
 .list-block .list-unit .list-table .list-table-header {
   display: grid;
   grid-template-columns: 4px [status] 32px [number] calc(var(--table-image-size) / 17 * 12) [image] 7fr [title] repeat(25, 0fr);
-  margin-top: 8px;
-  margin-bottom: 16px;
+  margin: 8px 0;
 }
 .list-block .list-unit .list-table .list-table-header .header-title {
   background: transparent !important;
@@ -571,7 +572,8 @@ a {
 }
 .list-block .list-unit .list-table .list-table-data {
   display: grid;
-  grid-template-columns: 4px [status] 32px [number] calc(var(--table-image-size) / 17 * 12) [image] 7fr [title] repeat(25, 0fr);
+  grid-template-columns: 4px [status] 32px [number] calc(var(--table-image-size) / 17 * 12) [image] 7fr [title] repeat(25, 0fr) [misc];
+  align-items: center;
   color: var(--text-color) !important;
 }
 .list-block .list-unit .list-table .list-table-data a.edit-disabled {
@@ -580,12 +582,24 @@ a {
 .list-block .list-unit .list-table .list-table-data .data {
   border: 0;
 }
+.list-block .list-unit .list-table .list-table-data .data.status {
+  height: 100%;
+}
 .list-block .list-unit .list-table .list-table-data .data.image .image {
   object-fit: cover;
   border: 0;
   border-radius: 5px;
   height: var(--table-image-size);
   width: calc(var(--table-image-size) / 17 * 12);
+}
+.list-block .list-unit .list-table .list-table-data .data.title {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.list-block .list-unit .list-table .list-table-data .data.title .add-edit-more {
+  position: absolute !important;
+  right: 0;
 }
 .list-block .list-unit .list-table .list-table-data .data:is(.started, .finished, .type, .days, .season, .airing-started, .airing-finished) {
   display: flex;
@@ -597,13 +611,22 @@ a {
   white-space: nowrap;
 }
 .list-block .list-unit .list-table .list-table-data .data.score {
-  width: 65px;
+  display: flex;
+  align-items: center;
   order: 1;
 }
-.list-block .list-unit .list-table .list-table-data .data.progress {
+.list-block .list-unit .list-table .list-table-data .data.score > * {
   height: 16px;
   width: 65px;
+}
+.list-block .list-unit .list-table .list-table-data .data.progress {
+  display: flex;
+  align-items: center;
   order: 2;
+}
+.list-block .list-unit .list-table .list-table-data .data.progress > * {
+  height: 16px;
+  width: 65px;
 }
 .list-block .list-unit .list-table .list-table-data .data:is(.type, .season) {
   display: flex;
@@ -613,6 +636,7 @@ a {
   order: 3;
 }
 .list-block .list-unit .list-table .list-table-data .data.type {
+  margin-top: -16px;
   margin-right: -95px;
 }
 .list-block .list-unit .list-table .list-table-data .data.season {
@@ -626,13 +650,13 @@ a {
   order: 4;
 }
 .list-block .list-unit .list-table .list-table-data .data.started {
+  margin-top: -32px;
   margin-right: -100px;
 }
 .list-block .list-unit .list-table .list-table-data .data.started::before {
   content: "Started:";
 }
 .list-block .list-unit .list-table .list-table-data .data.finished {
-  margin-top: 16px;
   margin-right: -100px;
 }
 .list-block .list-unit .list-table .list-table-data .data.finished::before {
@@ -652,6 +676,7 @@ a {
   order: 5;
 }
 .list-block .list-unit .list-table .list-table-data .data.airing-started {
+  margin-top: -16px;
   margin-right: -100px;
 }
 .list-block .list-unit .list-table .list-table-data .data.airing-started::before {
