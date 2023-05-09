@@ -605,7 +605,7 @@ a {
       //* Table headers, rearranging and sizing here
       .list-table-header {
         display: grid;
-        grid-template-columns: 4px [status] 32px [number] calc(var(--table-image-size) / 17 * 12) [image] 7fr [title] repeat(25, 0fr);
+        grid-template-columns: 4px [status] 32px [number] calc(var(--table-image-size) / 17 * 12) [image] 8fr [title] repeat(25, 0fr);
         margin: 8px 0;
 
         .header-title {
@@ -688,6 +688,17 @@ a {
           &:nth-child(13) {
             margin-top: 18px;
           }
+
+          //* Manga list stuff
+          &.chapters {
+            height: 18px;
+            width: 65px;
+          }
+
+          &.volumes {
+            height: 18px;
+            width: 65px;
+          }
         }
 
         * {
@@ -698,7 +709,7 @@ a {
       //* Table data items, rearranging and sizing here
       .list-table-data {
         display: grid;
-        grid-template-columns: 4px [status] 32px [number] calc(var(--table-image-size) / 17 * 12) [image] 7fr [title] repeat(25, 0fr) [misc];
+        grid-template-columns: 4px [status] 32px [number] calc(var(--table-image-size) / 17 * 12) [image] 8fr [title] repeat(25, 0fr) [misc];
         align-items: center;
         color: var(--text-color) !important;
         
@@ -844,11 +855,16 @@ a {
               content: 'Ended:';
             }
           }
-        }
-      }
 
-      .more-info {
-        animation: infoOpen 150ms;
+          //* Manga list stuff
+          &.chapter {
+            width: 65px;
+          }
+
+          &.volume {
+            width: 65px;
+          }
+        }
       }
     }
   }
@@ -884,10 +900,6 @@ a {
   .header {
     left: calc((100vw - var(--table-width)) / 2 + 285px);
   }
-}
-
-@keyframes infoOpen {
-  0% {}
 }
 
 @keyframes moveSlideshow {
