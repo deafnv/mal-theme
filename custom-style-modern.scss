@@ -15,11 +15,6 @@
   --table-image-size: 100px; /* Size of image preview in table */
 }
 
-//! REMOVE THIS
-#gdpr-modal-bottom {
-  display: none;
-}
-
 ::-webkit-scrollbar {
   width: 8px;
   height: 3px;
@@ -651,8 +646,18 @@ a {
             margin-right: -95px;
           }
 
+          //* Season element has no anchor element
           &.started:not(:has(a)) {
             margin-top: 18px;
+          }
+
+          //* Tags
+          &.tags {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 95px;
+            order: 4;
           }
 
           //* Started, ended watch
@@ -660,32 +665,32 @@ a {
             display: none;
           }
 
-          &:nth-child(8), &:nth-child(9) {
-            height: 18px;
-            width: 100px;
-            order: 4;
-          }
-
-          &:nth-child(8) {
-            margin-right: -100px;
-          }
-
-          &:nth-child(9) {
-            margin-top: 18px;
-          }
-
-          //* Start, finish aired
-          &:nth-child(12), &:nth-child(13) {
+          &.started:not(.started ~ .started), &.finished:not(.finished ~ .finished) {
             height: 18px;
             width: 100px;
             order: 5;
           }
 
-          &:nth-child(12) {
+          &.started:not(.started ~ .started) {
             margin-right: -100px;
           }
 
-          &:nth-child(13) {
+          &.finished:not(.finished ~ .finished) {
+            margin-top: 18px;
+          }
+
+          //* Start, finish aired
+          &.started:not(:has(~ .started)), &.finished:not(:has(~ .finished)) {
+            height: 18px;
+            width: 100px;
+            order: 6;
+          }
+
+          &.started:not(:has(~ .started)) {
+            margin-right: -100px;
+          }
+
+          &.finished:not(:has(~ .finished)) {
             margin-top: 18px;
           }
 
@@ -735,7 +740,8 @@ a {
           &.title {
             position: relative;
             display: flex;
-            align-items: center;
+            flex-direction: column;
+            justify-content: center;
 
             .add-edit-more {
               position: absolute !important;
@@ -796,13 +802,19 @@ a {
             margin-top: 16px;
           }
 
+          //* Tags
+          &.tags {
+            width: 95px;
+            order: 4;
+          }
+
           //* Started, finished, days column
           &:is(.started, .finished, .days) {
             display: flex;
             gap: 0.2rem;
             height: 16px;
             width: 100px;
-            order: 4;
+            order: 5;
           }
 
           &.started {
@@ -836,7 +848,7 @@ a {
             gap: 0.2rem;
             height: 16px;
             width: 100px;
-            order: 5;
+            order: 6;
           }
 
           &.airing-started {

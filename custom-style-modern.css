@@ -16,10 +16,6 @@
   --table-image-size: 100px; /* Size of image preview in table */
 }
 
-#gdpr-modal-bottom {
-  display: none;
-}
-
 ::-webkit-scrollbar {
   width: 8px;
   height: 3px;
@@ -542,29 +538,36 @@ a {
 .list-block .list-unit .list-table .list-table-header .header-title.started:not(:has(a)) {
   margin-top: 18px;
 }
+.list-block .list-unit .list-table .list-table-header .header-title.tags {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 95px;
+  order: 4;
+}
 .list-block .list-unit .list-table .list-table-header .header-title.days {
   display: none;
 }
-.list-block .list-unit .list-table .list-table-header .header-title:nth-child(8), .list-block .list-unit .list-table .list-table-header .header-title:nth-child(9) {
-  height: 18px;
-  width: 100px;
-  order: 4;
-}
-.list-block .list-unit .list-table .list-table-header .header-title:nth-child(8) {
-  margin-right: -100px;
-}
-.list-block .list-unit .list-table .list-table-header .header-title:nth-child(9) {
-  margin-top: 18px;
-}
-.list-block .list-unit .list-table .list-table-header .header-title:nth-child(12), .list-block .list-unit .list-table .list-table-header .header-title:nth-child(13) {
+.list-block .list-unit .list-table .list-table-header .header-title.started:not(.started ~ .started), .list-block .list-unit .list-table .list-table-header .header-title.finished:not(.finished ~ .finished) {
   height: 18px;
   width: 100px;
   order: 5;
 }
-.list-block .list-unit .list-table .list-table-header .header-title:nth-child(12) {
+.list-block .list-unit .list-table .list-table-header .header-title.started:not(.started ~ .started) {
   margin-right: -100px;
 }
-.list-block .list-unit .list-table .list-table-header .header-title:nth-child(13) {
+.list-block .list-unit .list-table .list-table-header .header-title.finished:not(.finished ~ .finished) {
+  margin-top: 18px;
+}
+.list-block .list-unit .list-table .list-table-header .header-title.started:not(:has(~ .started)), .list-block .list-unit .list-table .list-table-header .header-title.finished:not(:has(~ .finished)) {
+  height: 18px;
+  width: 100px;
+  order: 6;
+}
+.list-block .list-unit .list-table .list-table-header .header-title.started:not(:has(~ .started)) {
+  margin-right: -100px;
+}
+.list-block .list-unit .list-table .list-table-header .header-title.finished:not(:has(~ .finished)) {
   margin-top: 18px;
 }
 .list-block .list-unit .list-table .list-table-header .header-title.chapters {
@@ -603,7 +606,8 @@ a {
 .list-block .list-unit .list-table .list-table-data .data.title {
   position: relative;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  justify-content: center;
 }
 .list-block .list-unit .list-table .list-table-data .data.title .add-edit-more {
   position: absolute !important;
@@ -650,12 +654,16 @@ a {
 .list-block .list-unit .list-table .list-table-data .data.season {
   margin-top: 16px;
 }
+.list-block .list-unit .list-table .list-table-data .data.tags {
+  width: 95px;
+  order: 4;
+}
 .list-block .list-unit .list-table .list-table-data .data:is(.started, .finished, .days) {
   display: flex;
   gap: 0.2rem;
   height: 16px;
   width: 100px;
-  order: 4;
+  order: 5;
 }
 .list-block .list-unit .list-table .list-table-data .data.started {
   margin-top: -32px;
@@ -681,7 +689,7 @@ a {
   gap: 0.2rem;
   height: 16px;
   width: 100px;
-  order: 5;
+  order: 6;
 }
 .list-block .list-unit .list-table .list-table-data .data.airing-started {
   margin-top: -16px;
