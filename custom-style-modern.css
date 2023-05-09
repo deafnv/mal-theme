@@ -3,7 +3,7 @@
   --profile-image: url("");
   --bg: rgba(145, 34, 0, 0.984);
   --bg-lighter: #727272;
-  --bg-darker: rgba(14, 0, 12, 0.644);
+  --bg-darker: rgba(14, 0, 12, 0.744);
   --primary: #ffc16f;
   --secondary: rgba(218, 51, 0, 0.733);
   --text-color: white;
@@ -15,6 +15,7 @@
   --right-image: url("");
   --banner-height: 300px;
   --table-width: 1200px;
+  --table-image-size: 100px; /* Size of image preview in table */
 }
 
 ::-webkit-scrollbar {
@@ -488,9 +489,6 @@ a {
 .list-block .list-unit .list-table > tbody {
   background: transparent;
 }
-.list-block .list-unit .list-table > tbody:first-of-type .title {
-  width: calc(var(--table-width) - 580px);
-}
 .list-block .list-unit .list-table > tbody:nth-of-type(2n+1) {
   background-color: unset;
 }
@@ -500,14 +498,80 @@ a {
 .list-block .list-unit .list-table > tbody:nth-last-of-type(1) .status {
   border-radius: 0 0 5px 5px;
 }
+.list-block .list-unit .list-table .list-table-header {
+  display: grid;
+  grid-template-columns: 4px [status] 32px [number] calc(var(--table-image-size) / 17 * 12) [image] 7fr [title] repeat(25, 0fr);
+  margin-top: 8px;
+  margin-bottom: 16px;
+}
 .list-block .list-unit .list-table .list-table-header .header-title {
   background: transparent !important;
+  padding: 0;
   border-bottom: 0 !important;
 }
 .list-block .list-unit .list-table .list-table-header .header-title * {
   color: var(--text-color) !important;
 }
+.list-block .list-unit .list-table .list-table-header .header-title.title {
+  padding-left: 8px;
+}
+.list-block .list-unit .list-table .list-table-header .header-title.number, .list-block .list-unit .list-table .list-table-header .header-title.image, .list-block .list-unit .list-table .list-table-header .header-title.title, .list-block .list-unit .list-table .list-table-header .header-title.score, .list-block .list-unit .list-table .list-table-header .header-title.progress {
+  display: flex;
+  align-items: center;
+}
+.list-block .list-unit .list-table .list-table-header .header-title.number, .list-block .list-unit .list-table .list-table-header .header-title.image, .list-block .list-unit .list-table .list-table-header .header-title.score, .list-block .list-unit .list-table .list-table-header .header-title.progress {
+  justify-content: center;
+}
+.list-block .list-unit .list-table .list-table-header .header-title.score {
+  width: 65px;
+  order: 1;
+}
+.list-block .list-unit .list-table .list-table-header .header-title.progress {
+  width: 65px;
+  order: 2;
+}
+.list-block .list-unit .list-table .list-table-header .header-title.type, .list-block .list-unit .list-table .list-table-header .header-title.started:not(:has(a)) {
+  height: 18px;
+  width: 95px;
+  order: 3;
+}
+.list-block .list-unit .list-table .list-table-header .header-title.type {
+  margin-right: -95px;
+}
+.list-block .list-unit .list-table .list-table-header .header-title.started:not(:has(a)) {
+  margin-top: 18px;
+}
+.list-block .list-unit .list-table .list-table-header .header-title.days {
+  display: none;
+}
+.list-block .list-unit .list-table .list-table-header .header-title:nth-child(8), .list-block .list-unit .list-table .list-table-header .header-title:nth-child(9) {
+  height: 18px;
+  width: 100px;
+  order: 4;
+}
+.list-block .list-unit .list-table .list-table-header .header-title:nth-child(8) {
+  margin-right: -100px;
+}
+.list-block .list-unit .list-table .list-table-header .header-title:nth-child(9) {
+  margin-top: 18px;
+}
+.list-block .list-unit .list-table .list-table-header .header-title:nth-child(12), .list-block .list-unit .list-table .list-table-header .header-title:nth-child(13) {
+  height: 18px;
+  width: 100px;
+  order: 5;
+}
+.list-block .list-unit .list-table .list-table-header .header-title:nth-child(12) {
+  margin-right: -100px;
+}
+.list-block .list-unit .list-table .list-table-header .header-title:nth-child(13) {
+  margin-top: 18px;
+}
+.list-block .list-unit .list-table .list-table-header * {
+  width: unset;
+}
 .list-block .list-unit .list-table .list-table-data {
+  display: grid;
+  grid-template-columns: 4px [status] 32px [number] calc(var(--table-image-size) / 17 * 12) [image] 7fr [title] repeat(25, 0fr);
   color: var(--text-color) !important;
 }
 .list-block .list-unit .list-table .list-table-data a.edit-disabled {
@@ -517,10 +581,87 @@ a {
   border: 0;
 }
 .list-block .list-unit .list-table .list-table-data .data.image .image {
+  object-fit: cover;
   border: 0;
   border-radius: 5px;
-  height: 100px;
-  width: 70.5882352941px;
+  height: var(--table-image-size);
+  width: calc(var(--table-image-size) / 17 * 12);
+}
+.list-block .list-unit .list-table .list-table-data .data:is(.started, .finished, .type, .days, .season, .airing-started, .airing-finished) {
+  display: flex;
+  padding: 0;
+  height: min-content;
+  white-space: nowrap;
+}
+.list-block .list-unit .list-table .list-table-data .data:is(.started, .finished, .type, .days, .season, .airing-started, .airing-finished) * {
+  white-space: nowrap;
+}
+.list-block .list-unit .list-table .list-table-data .data.score {
+  width: 65px;
+  order: 1;
+}
+.list-block .list-unit .list-table .list-table-data .data.progress {
+  height: 16px;
+  width: 65px;
+  order: 2;
+}
+.list-block .list-unit .list-table .list-table-data .data:is(.type, .season) {
+  display: flex;
+  justify-content: center;
+  height: 16px;
+  width: 95px;
+  order: 3;
+}
+.list-block .list-unit .list-table .list-table-data .data.type {
+  margin-right: -95px;
+}
+.list-block .list-unit .list-table .list-table-data .data.season {
+  margin-top: 16px;
+}
+.list-block .list-unit .list-table .list-table-data .data:is(.started, .finished, .days) {
+  display: flex;
+  gap: 0.2rem;
+  height: 16px;
+  width: 100px;
+  order: 4;
+}
+.list-block .list-unit .list-table .list-table-data .data.started {
+  margin-right: -100px;
+}
+.list-block .list-unit .list-table .list-table-data .data.started::before {
+  content: "Started:";
+}
+.list-block .list-unit .list-table .list-table-data .data.finished {
+  margin-top: 16px;
+  margin-right: -100px;
+}
+.list-block .list-unit .list-table .list-table-data .data.finished::before {
+  content: "Finished:";
+}
+.list-block .list-unit .list-table .list-table-data .data.days {
+  margin-top: 32px;
+}
+.list-block .list-unit .list-table .list-table-data .data.days::after {
+  content: "day(s)";
+}
+.list-block .list-unit .list-table .list-table-data .data:is(.airing-started, .airing-finished) {
+  display: flex;
+  gap: 0.2rem;
+  height: 16px;
+  width: 100px;
+  order: 5;
+}
+.list-block .list-unit .list-table .list-table-data .data.airing-started {
+  margin-right: -100px;
+}
+.list-block .list-unit .list-table .list-table-data .data.airing-started::before {
+  content: "Aired:";
+}
+.list-block .list-unit .list-table .list-table-data .data.airing-finished {
+  margin-top: 16px;
+}
+.list-block .list-unit .list-table .list-table-data .data.airing-finished::before {
+  content: "Ended:";
 }
 .list-block .list-unit .list-table .more-info {
   animation: infoOpen 150ms;
